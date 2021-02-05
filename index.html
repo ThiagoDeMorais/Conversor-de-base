@@ -4,10 +4,18 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
         <title>Document</title>
     </head>
     <body>
-        
+        <div class="container">
+            <label for="hexa">Número em hexadecimal</label>
+            <input class="box" id="hexa" type="text" oninput="HexaMain()">
+            <label for="deci">Número em decimal</label>
+            <input class="box" id="deci" type="text" oninput="">
+            <label for="binary">Número em binário</label>
+            <input class="box" id="binary" type="text" oninput="">
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
