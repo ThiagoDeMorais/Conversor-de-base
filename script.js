@@ -1,17 +1,18 @@
-
-
 //GENERAL FUNCTIONS++
+//------Transfere os elementos da string capturada para um vetor------
 function stringForArray(str, vect) {
     for (var i = 0; i < str.length; i++) {
         vect.push(str[i]);
     }
 }
+//------
 //GENERAL FUNCTIONS--
 
 
 //HEXA FUNCTIONS++
 //HEXA AUXILIAR FUNCTIONS++
-//------
+
+//------Verifica se o formato digitado pelo o usuário é válido------
 function hexaIntegrityVerification(vect) {
     for (var i = 0; i < vect.length; i++) {
         if (vect[i] != 0 && vect[i] != 1 && vect[i] != 2 && vect[i] != 3 && vect[i] != 4 && vect[i] != 5 && vect[i] != 6 && vect[i] != 7 && vect[i] != 8 && vect[i] != 9 && vect[i] != 'A' && vect[i] != 'B' && vect[i] != 'C' && vect[i] != 'D' && vect[i] != 'E' && vect[i] != 'F') {
@@ -22,7 +23,7 @@ function hexaIntegrityVerification(vect) {
 }
 //------
 
-//------
+//------Troca os caracteres não númericos por seus equivalentes númericos(Base Hexadecimal)------
 function preparationForComputation(vect) {
     for (var i = 0; i < vect.length; i++) {
         switch (vect[i]) {
@@ -50,7 +51,8 @@ function preparationForComputation(vect) {
 //------
 //HEXA AUXILIAR FUNCTIONS--
 
-//------
+
+//------Executa as funções auxiliares e as funções principais(Hexadecimal para binário e hexadecimal para Decimal)------
 function HexaMain(){
     let strHexa = document.getElementById("hexa").value.toUpperCase();
     let vectHexa = [];
@@ -68,7 +70,8 @@ function HexaMain(){
     }
 }
 
-
+//HEXA MAIN FUNCTIONS++
+//------Converte o número de base hexadecimal para seu equivalente em base decimal e, em seguida, mostra seu valor ao usuário------
 function HexaForDeci(vect) { 
         let number = 0;
         let vectAux = [... vect];
@@ -84,7 +87,7 @@ function HexaForDeci(vect) {
 }
 //------
 
-//------
+//------Converte o número de base hexadecimal para seu equivalente em base binária e, em seguida, mostra seu valor ao usuário------
 function HexaForBi(vect) { 
     let vectAux = [... vect];
     for (let i=0; i < vect.length; i++) {
@@ -139,81 +142,98 @@ function HexaForBi(vect) {
                 break;
         }
     }
-    vectAux = vectAux.join('');//remver vírgula
+    vectAux = vectAux.join('');//remover vírgula
     document.getElementById("binary").value = vectAux;    
 
+}
+//------
+//HEXA MAIN FUNCTIONS--
+//HEXA FUNCTIONS--
+
+
+
+
+//DECI FUNCTIONS++
+//HEXA AUXILIAR FUNCTIONS++
+//------Verifica se o formato digitado pelo o usuário é válido------
+function deciIntegrityVerification(str) {
+    for (var i = 0; i < str.length; i++) {
+        if (str[i] != 0 && str[i] != 1 && str[i] != 2 && str[i] != 3 && str[i] != 4 && str[i] != 5 && str[i] != 6 && str[i] != 7 && str[i] != 8 && str[i] != 9) {
+            return false
+        }
+    }
+    return true;
 }
 //------
 
 
 
-//HEXA FUNCTIONS--
+function DeciMain(){
+    let strDeci = document.getElementById("deci").value;
+    if(deciIntegrityVerification(strDeci) == false){
+        document.getElementById("hexa").value = "";  
+        document.getElementById("binary").value = "";  
+        document.getElementById("deci").value = "";      
+        alert("Erro no formato do número hexadecimal");
+    }else{
+        DeciForHexa(strDeci);
+        DeciForBI(strDeci);
+    }
+}
 
+function DeciForHexa(number){
+    let vectAux = [];
+    while(number>0){
+        vectAux.push(number%16);
+        number = Math.floor(number/16);
+        console.log("vectAuxor" + number);
+    }
+    
+    for (var i = 0; i < vectAux.length; i++) {
+        switch (vectAux[i]) {
+            case 10:
+                vectAux[i] = "A";
+                break;
+            case 11:
+                vectAux[i] = "B";
+                break;
+            case 12:
+                vectAux[i] = "C";
+                break;
+            case 13:
+                vectAux[i] = "D";
+                break;
+            case 14:
+                vectAux[i] = "E";
+                break;
+            case 15:
+                vectAux[i] = "F";
+                break;
+        }
+    }
+
+    vectAux.reverse();
+    vectAux = vectAux.join('');//remover vírgula
+    document.getElementById("hexa").value = vectAux;  
+}
+
+
+function DeciForBI(number){
+    let vectAux = [];
+    while(number>0){
+        vectAux.push(number%2);
+        number = Math.floor(number/2);
+        console.log("vectAuxor" + number);
+    }
+
+    vectAux.reverse();
+    vectAux = vectAux.join('');//remover vírgula
+    document.getElementById("binary").value = vectAux; 
+}
+//DECI --> Hexa and Bi--
 
 
 /*
-
-//HEXA --> Deci and Bi--
-
-
-//DECI -->Hexa and Bi++
-function DeciForHexa(number,vet){
-    if(number<=16){
-        vet.push(number); 
-    }else{
-        while(number>0){
-            vet.push(number%16);
-            number = Math.floor(number/16);
-            if(number ==16){
-                vet.push(number); 
-            }
-            console.log("Vetor" + number);
-        }
-    }
-    for (var i = 0; i < vet.length; i++) {
-        switch (vet[i]) {
-            case 10:
-                vet[i] = "A";
-                break;
-            case 11:
-                vet[i] = "B";
-                break;
-            case 12:
-                vet[i] = "C";
-                break;
-            case 13:
-                vet[i] = "D";
-                break;
-            case 14:
-                vet[i] = "E";
-                break;
-            case 15:
-                vet[i] = "F";
-                break;
-        }
-    }
-
-    vet.reverse();
-}
-
-
-function DeciForBI(number,vet){
-    if(number==1 || number == 0){
-        vet.push(number); 
-    }else{
-        while(number!=1){
-            vet.push(number%2);
-            number = Math.floor(number/2);
-            if(number == 1){
-                vet.push(number); 
-            }
-            console.log("Vetor" + vet);
-        }
-    }
-
-    vet.reverse();
-}
-//DECI --> Hexa and Bi--
 
 //BI --> Bi and Hexa++
 function BiForDeci(vect) { 
