@@ -1,4 +1,4 @@
-//GENERAL FUNCTIONS++
+//####GENERAL FUNCTIONS####++
 //------Transfere os elementos da string capturada para um vetor------
 function stringForArray(str, vect) {
     for (var i = 0; i < str.length; i++) {
@@ -6,10 +6,10 @@ function stringForArray(str, vect) {
     }
 }
 //------
-//GENERAL FUNCTIONS--
+//####GENERAL FUNCTIONS####--
 
 
-//HEXA FUNCTIONS++
+//####HEXA FUNCTIONS####++
 //HEXA AUXILIAR FUNCTIONS++
 
 //------Verifica se o formato digitado pelo o usuário é válido------
@@ -52,7 +52,7 @@ function preparationForComputation(vect) {
 //HEXA AUXILIAR FUNCTIONS--
 
 
-//------Executa as funções auxiliares e as funções principais(Hexadecimal para binário e hexadecimal para Decimal)------
+//*****Executa as funções auxiliares e as funções principais(Hexadecimal para binário e hexadecimal para Decimal)*****
 function HexaMain(){
     let strHexa = document.getElementById("hexa").value.toUpperCase();
     let vectHexa = [];
@@ -148,12 +148,12 @@ function HexaForBi(vect) {
 }
 //------
 //HEXA MAIN FUNCTIONS--
-//HEXA FUNCTIONS--
+//####HEXA FUNCTIONS####--
 
 
 
 
-//DECI FUNCTIONS++
+//####DECI FUNCTIONS####++
 //HEXA AUXILIAR FUNCTIONS++
 //------Verifica se o formato digitado pelo o usuário é válido------
 function deciIntegrityVerification(str) {
@@ -165,22 +165,25 @@ function deciIntegrityVerification(str) {
     return true;
 }
 //------
+//HEXA AUXILIAR FUNCTIONS--
 
-
-
+//*****Executa as funções auxiliares e as funções principais(Decimal para Hexadecimal e Decimal para binário*****
 function DeciMain(){
     let strDeci = document.getElementById("deci").value;
     if(deciIntegrityVerification(strDeci) == false){
         document.getElementById("hexa").value = "";  
         document.getElementById("binary").value = "";  
         document.getElementById("deci").value = "";      
-        alert("Erro no formato do número hexadecimal");
+        alert("Erro no formato do número decimal");
     }else{
         DeciForHexa(strDeci);
         DeciForBI(strDeci);
     }
 }
+//------
 
+//DECI MAIN FUNCTIONS++
+//------Converte o número de base decimal para seu equivalente em base hexadecimal e, em seguida, mostra seu valor ao usuário------
 function DeciForHexa(number){
     let vectAux = [];
     while(number>0){
@@ -216,8 +219,9 @@ function DeciForHexa(number){
     vectAux = vectAux.join('');//remover vírgula
     document.getElementById("hexa").value = vectAux;  
 }
+//------
 
-
+//------Converte o número de base decimal para seu equivalente em base binária e, em seguida, mostra seu valor ao usuário------
 function DeciForBI(number){
     let vectAux = [];
     while(number>0){
@@ -230,22 +234,95 @@ function DeciForBI(number){
     vectAux = vectAux.join('');//remover vírgula
     document.getElementById("binary").value = vectAux; 
 }
-//DECI --> Hexa and Bi--
+//------
+//DECI MAIN FUNCTIONS--
+//####DECI FUNCTIONS####--
 
 
-/*
 
-//BI --> Bi and Hexa++
+
+//####BINARY FUNCTIONS####++
+//BINARY AUXILIAR FUNCTIONS++
+//------Verifica se o formato digitado pelo o usuário é válido------
+function biIntegrityVerification(vect) {
+    for (var i = 0; i < vect.length; i++) {
+        if (vect[i] != 0 && vect[i] != 1) {
+            return false
+        }
+    }
+    return true;
+}
+//------
+
+//------Insere zeros até que possa se dividir o vetor em conjuntos de quatro elemesntos------
+function InsertZeros(vect){
+     while(vect.length % 4 !=0){
+        vect.unshift("0");
+    }
+    console.log(vect);
+}
+//------
+
+//------Faz com que cada elemento do vetor possua quatro quatro algarismos------
+function PuttingInSetsOfFour(vect1,vect2){
+    let concatenator = "";
+    let j = 0;
+    for(let i = 0; i<vect1.length; i++){// com i = 1 a lógica de agregação de valores fica mais palatável
+        concatenator = concatenator + (vect1[i]);
+        console.log("Valor: " + vect1[i]);
+        
+        if(((vect1.length)+(i+1))%4==0){
+            vect2[j] = concatenator;
+            j++;
+            concatenator = "";
+        }
+        
+    }
+    console.log("concatenador: " + concatenator);
+    console.log("Aqui " + vect2);
+}
+//------
+//BINARY AUXILIAR FUNCTIONS--
+
+//*****Executa as funções auxiliares e as funções principais(Binário para Decimal e Hexadecimal*****
+function BiMain(){
+    let vectBi = [];
+    let vectBiSetOfFour = [];
+    let strBi = document.getElementById("binary").value;
+    if(biIntegrityVerification(strBi) == false){
+        document.getElementById("hexa").value = "";  
+        document.getElementById("binary").value = "";  
+        document.getElementById("deci").value = "";      
+        alert("Erro no formato do número binário");
+    }else{
+        stringForArray(strBi, vectBi);
+        BiForDeci(vectBi)
+        InsertZeros(vectBi);
+        PuttingInSetsOfFour(vectBi,vectBiSetOfFour);
+        BiForHexa(vectBiSetOfFour);
+    }
+
+}
+//------
+
+//BINARY MAIN FUNCTIONS++
+//------Converte o número de base binária para seu equivalente em base decimal e, em seguida, mostra seu valor ao usuário------
 function BiForDeci(vect) { 
     let number = 0;
     for (var i = (vect.length); i > 0; i--) {
         number = number + vect[i - 1] * Math.pow(2, (vect.length - i));
     }
-    return number;
+    if(number==0){
+        document.getElementById("deci").value = ""; 
+    }else{
+        document.getElementById("deci").value = number; 
+    }
 }
+//------
 
+//------Converte o número de base binária para seu equivalente em base hexadecimal e, em seguida, mostra seu valor ao usuário------
 function BiForHexa(vect) { 
-    for (let i=0; i < vect.length; i = i+3) {
+    for (let i=0; i < vect.length; i++) {
         switch (vect[i]) {
             case '0000':
                 vect[i] = "0";
@@ -296,10 +373,12 @@ function BiForHexa(vect) {
                 vect[i] = "F";
                 break;
         }
-        console.log(vect);
+        console.log(vect[i]);
     }
+    vect = vect.join('');//remover vírgula
+    document.getElementById("hexa").value = vect; 
 }
-//BI --> Bi and Hexa++
+//------
+//BINARY MAIN FUNCTIONS--
 
-*/
 
