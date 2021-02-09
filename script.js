@@ -1,8 +1,24 @@
 //####GENERAL FUNCTIONS####++
+
+//------Remoção de zeros a esquerda(Um número binário continua sendo representado em "pacotes" de quatro algarismos) ------
+//------Logo se os zeros a esquerda formarem,junto com outros alagarismos,um numero diferente de zero,------
+//------os zeros serão representados, como o caso de 0001 ------
+
+function leftZero(str){
+    let cont = 0;
+    while(str[cont]=='0'){
+        cont++;
+    }
+    return (cont);
+}
+
+
 //------Transfere os elementos da string capturada para um vetor------
 function stringForArray(str, vect) {
-    for (var i = 0; i < str.length; i++) {
+    let sizeI = leftZero(str)
+    for ( let i = sizeI ; i < str.length; i++) {
         vect.push(str[i]);
+        console.log("Vetor: " + vect[i-sizeI]);
     }
 }
 //------
