@@ -3,6 +3,11 @@
     padding: 0 px;
 }
 
+body{
+  background-color: rgb(13, 88, 126);
+
+}
+
 .box{
   display: block;  
   margin: auto;
@@ -13,7 +18,7 @@
 .container{
     text-align: center;
     margin: auto;
-    width: 70%;
+    width: 750px;
     height: 150px;
     background-color:rgb(127, 214, 255);
     color: rgb(13, 88, 126);

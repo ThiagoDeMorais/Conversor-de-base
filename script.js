@@ -3,7 +3,6 @@
 //------Remoção de zeros a esquerda(Um número binário continua sendo representado em "pacotes" de quatro algarismos) ------
 //------Logo se os zeros a esquerda formarem,junto com outros alagarismos,um numero diferente de zero,------
 //------os zeros serão representados, como o caso de 0001 ------
-
 function leftZero(str){
     let cont = 0;
     while(str[cont]=='0'){
